@@ -45,6 +45,7 @@ client_init(struct config *conf, int id, struct keyset *ks,
   cli->ks = ks;
   cli->vs = vs;
   cli->id = id;
+  cli->keyidx = 0;
   cli->prof = profile;
   cli->pool = pool;
   cli->running = 0;

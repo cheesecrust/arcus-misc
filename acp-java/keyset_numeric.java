@@ -44,6 +44,10 @@ class keyset_numeric implements keyset {
     next_idx = 0;
   }
 
+  public String get_key_by_cliid(client cli) {
+      return "";
+  }
+
   synchronized public String get_key() {
     int idx = next_idx++;
     if (next_idx >= set.length)

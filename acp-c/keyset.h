@@ -17,10 +17,14 @@
 #ifndef _KEYSET_H_
 #define _KEYSET_H_
 
+#include "client.h"
+
 struct keyset;
 
 struct keyset *keyset_init(int num, const char *prefix);
 void keyset_reset(struct keyset *ks);
 const char *keyset_get_key(struct keyset *ks, int *id);
+const char *keyset_get_key_by_cliid(struct keyset *ks, struct client *cli);
+
 
 #endif /* !defined(_KEYSET_H_) */

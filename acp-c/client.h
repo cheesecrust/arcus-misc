@@ -26,6 +26,7 @@ struct client {
   struct valueset *vs;
   struct client_profile *prof;
   int id;
+  int keyidx;
   memcached_pool_st *pool;
 
   /* Vars to track requests */

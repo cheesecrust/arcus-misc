@@ -20,6 +20,7 @@
 class keyset_default implements keyset {
   String[] set;
   int next_idx;
+  int offset;
 
   public keyset_default(int num, String prefix) {
     set = new String[num];
@@ -28,6 +29,7 @@ class keyset_default implements keyset {
       if (prefix != null)
         set[i] = prefix + set[i];
     }
+    this.offset = 0;
     reset();
   }
 
@@ -35,10 +37,17 @@ class keyset_default implements keyset {
     next_idx = 0;
   }
 
+  public String get_key_by_cliid(client cli) {
+      if (offset == 0) this.offset = set.length / cli.conf.client;
+      if (cli.keyidx >= offset) cli.keyidx = 0;
+      return set[cli.id*offset + cli.keyidx++];
+  }
+
   synchronized public String get_key() {
     int idx = next_idx++;
-    if (next_idx >= set.length)
+    if (next_idx >= set.length) {
       next_idx = 0;
+    }
     return set[idx];
   }
 }

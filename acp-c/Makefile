@@ -1,5 +1,5 @@
 #HOSTNAME:=$(shell hostname)
-BASEDIR=/home/username/arcus-rep
+BASEDIR=/home/test/arcus
 
 CC = gcc
 CFLAGS = -Wall -Werror -g \

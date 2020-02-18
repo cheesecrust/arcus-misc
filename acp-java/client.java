@@ -26,6 +26,7 @@ public class client implements Runnable {
   ArcusClientPool pool;
   ArcusClient fixed_ac = null;
   int id;
+  int keyidx;
   keyset ks;
   bkey_set bks;
   valueset vset;
@@ -53,6 +54,7 @@ public class client implements Runnable {
     this.ks = ks;
     this.bks = bks;
     this.vset = vset;
+    this.keyidx = 0;
     this.profile = profile;
   }
   

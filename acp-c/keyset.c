@@ -20,14 +20,22 @@
 #include <string.h>
 #include <pthread.h>
 #include "common.h"
-#include "keyset.h"
+#include "client.h"
+#include "config.h"
 
 struct keyset {
   const char **set;
   int set_size;
   int next_idx;
+  int offset;
   pthread_mutex_t lock;
 };
+
+void
+keyset_reset(struct keyset *ks)
+{
+  ks->next_idx = 0;
+}
 
 struct keyset *
 keyset_init(int num, const char *prefix)
@@ -41,11 +49,12 @@ keyset_init(int num, const char *prefix)
   pthread_mutex_init(&ks->lock, NULL);
   ks->set_size = num;
   ks->set = malloc(num * sizeof(char*));
+  ks->offset = 0;
   for (i = 0; i < num; i++) {
     if (prefix != NULL)
-      sprintf(buf, "%stestkey-%d", prefix, i);
+      sprintf(buf, "%stestkey한글-%d", prefix, i);
     else
-      sprintf(buf, "testkey-%d", i);
+      sprintf(buf, "testkey한글-%d", i);
     ks->set[i] = strdup(buf);
   }
   
@@ -53,11 +62,6 @@ keyset_init(int num, const char *prefix)
   return ks;
 }
 
-void
-keyset_reset(struct keyset *ks)
-{
-  ks->next_idx = 0;
-}
 
 const char *
 keyset_get_key(struct keyset *ks, int *id)
@@ -74,5 +78,18 @@ keyset_get_key(struct keyset *ks, int *id)
   pthread_mutex_unlock(&ks->lock);
   if (id != NULL)
     *id = idx;
+  return key;
+}
+
+const char *
+keyset_get_key_by_cliid(struct keyset *ks, struct client *cli)
+{
+  const char *key;
+  
+  pthread_mutex_lock(&ks->lock);
+  if (ks->offset == 0) ks->offset = ks->set_size / cli->conf->client;
+  if (cli->keyidx >= ks->offset) cli->keyidx = 0;
+  key = ks->set[cli->id * ks->offset + cli->keyidx++];
+  pthread_mutex_unlock(&ks->lock);
   return key;
 }

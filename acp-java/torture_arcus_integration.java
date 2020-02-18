@@ -48,7 +48,6 @@ public class torture_arcus_integration implements client_profile {
     int next_val_idx = 0;
     chunk_values = new String[chunk_sizes.length+1];
     chunk_values[next_val_idx++] = "Not_a_slab_class";
-    String lowercase = "abcdefghijlmnopqrstuvwxyz";
     for (int s : chunk_sizes) {
       int len = s*2/3;
       char[] raw = new char[len];
@@ -61,6 +60,7 @@ public class torture_arcus_integration implements client_profile {
     //Logger.getLogger("net.spy.memcached").setLevel(Level.DEBUG);
  }
 
+  String lowercase = "abcdefghijlmnopqrstuvwxyz";
   char[] dummystring = 
     ("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
      "abcdefghijlmnopqrstuvwxyz").toCharArray();
@@ -133,14 +133,18 @@ public class torture_arcus_integration implements client_profile {
 
   // get:set:delete:incr:decr = 3:1:0.01:0.1:0.0001
   public boolean do_KeyValue(client cli) throws Exception {
-    String key = cli.ks.get_key();
-    String workloads = chunk_values[24];
-    
+    String key = cli.ks.get_key_by_cliid(cli);
+    String[] workloads = { chunk_values[4], 
+                           chunk_values[5], 
+                           chunk_values[6], 
+                           chunk_values[7], 
+                           chunk_values[8] };
+
     // Set 
     for (int i = 0; i < 1; i++) {
       if (!cli.before_request())
         return false;
-      Future<Boolean> fb = cli.next_ac.set(key, cli.conf.client_exptime, workloads);
+      Future<Boolean> fb = cli.next_ac.set(key, cli.conf.client_exptime, workloads[random.nextInt(workloads.length)]);
       boolean ok = fb.get(cli.conf.client_timeout, TimeUnit.MILLISECONDS);
       if (!ok) {
         System.out.printf("KeyValue: set failed. id=%d key=%s\n", cli.id, key);
@@ -237,10 +241,10 @@ public class torture_arcus_integration implements client_profile {
   }
   
   public boolean do_Collection_Btree(client cli) throws Exception {
-    String key = cli.ks.get_key();
+    String key = cli.ks.get_key_by_cliid(cli);
     List<String> key_list = new LinkedList<String>();
-    for (int i = 0; i < 2; i++)
-      key_list.add(key + i);
+    for (int i = 0; i < 1; i++)
+      key_list.add(key + lowercase.charAt(i));
     
     String bkeyBASE = "bkey_byteArry";
 
@@ -251,14 +255,14 @@ public class torture_arcus_integration implements client_profile {
     CollectionAttributes attr = new CollectionAttributes();
     attr.setExpireTime(cli.conf.client_exptime);
 
-    String[] workloads = { chunk_values[1], 
-                           chunk_values[1], 
-                           chunk_values[2], 
-                           chunk_values[2], 
-                           chunk_values[3] };
+    String[] workloads = { chunk_values[4], 
+                           chunk_values[5], 
+                           chunk_values[6], 
+                           chunk_values[7], 
+                           chunk_values[8] };
 
     // BopInsert + byte_array bkey
-    for (int j = 0; j < 2; j++) {
+    for (int j = 0; j < 1; j++) {
       // Insert 10 bkey
       for (int i = 0; i < 10; i++) {
         if (!cli.before_request())
@@ -311,7 +315,7 @@ public class torture_arcus_integration implements client_profile {
     }
 
     // BopGet Range + filter
-    for (int j = 0; j < 2; j++) {
+    for (int j = 0; j < 1; j++) {
       if (!cli.before_request())
         return false;
       String bk = bkeyBASE + Integer.toString(j) + Integer.toString(0);
@@ -410,7 +414,7 @@ public class torture_arcus_integration implements client_profile {
         new ElementFlagUpdate(eflagOffset, 
                               ElementFlagFilter.BitWiseOperands.AND,
                               ("aflag").getBytes());
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 1; i++) {
         if (!cli.before_request())
           return false;
         String bk = bkeyBASE + "0" + Integer.toString(i);
@@ -446,7 +450,7 @@ public class torture_arcus_integration implements client_profile {
     
     // BopDelete          (eflag filter delete)
     {
-      for (int j = 0; j < 2; j++) {
+      for (int j = 0; j < 1; j++) {
         if (!cli.before_request())
           return false;
         String bk = bkeyBASE + Integer.toString(j) + "0";
@@ -470,28 +474,27 @@ public class torture_arcus_integration implements client_profile {
     return true;
   }
 
-/* Map collection not support in some node version. skip test in naver long test
   public boolean do_Collection_Map(client cli) throws Exception {
-    String key = cli.ks.get_key();
+    String key = cli.ks.get_key_by_cliid(cli);
     List<String> key_list = new LinkedList<String>();
-    for (int i = 0; i < 4; i++)
-      key_list.add(key + i);
+    for (int i = 0; i < 1; i++)
+      key_list.add(key + lowercase.charAt(i));
 
     String mkeyBASE = "mkey";
 
     CollectionAttributes attr = new CollectionAttributes();
-    attr.setExpireTime(ExpireTime);
+    attr.setExpireTime(cli.conf.client_exptime);
 
-    String[] workloads = { chunk_values[1],
-            chunk_values[1],
-            chunk_values[2],
-            chunk_values[2],
-            chunk_values[3] };
+    String[] workloads = { chunk_values[4], 
+                           chunk_values[5], 
+                           chunk_values[6], 
+                           chunk_values[7], 
+                           chunk_values[8] };
 
     // MopInsert
-    for (int j = 0; j < 4; j++) {
-      // Insert 50 mkey
-      for (int i = 0; i < 50; i++) {
+    for (int j = 0; j < 1; j++) {
+      // Insert 10 mkey
+      for (int i = 0; i < 10; i++) {
         if (!cli.before_request())
           return false;
         // Uniq mkey
@@ -514,7 +517,7 @@ public class torture_arcus_integration implements client_profile {
     // MopInsert Bulk (Piped)
     {
       Map<String, Object> elements = new HashMap<String, Object>();
-      for (int i = 0; i < 50; i++) {
+      for (int i = 0; i < 10; i++) {
         String mkey = mkeyBASE + Integer.toString(i) + "bulk";
         elements.put(mkey, workloads[0]);
       }
@@ -548,7 +551,7 @@ public class torture_arcus_integration implements client_profile {
               cli.next_ac.asyncMopGet(key_list.get(0), false, false);
       Map<String, Object> val =
               f.get(cli.conf.client_timeout, TimeUnit.MILLISECONDS);
-      if (val == null || val.size() != 100) {
+      if (val == null || val.size() != 20) {
         System.out.printf("Collection_Map: MopGet all failed." +
                         " id=%d key=%s val.size=%d\n", cli.id,
                 key_list.get(0), val == null ? -1 : 0);
@@ -578,7 +581,7 @@ public class torture_arcus_integration implements client_profile {
     {
       String key0 = key_list.get(0);
       String value = "ThisIsChangeValue";
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 1; i++) {
         if (!cli.before_request())
           return false;
         String mkey = mkeyBASE + "0" + Integer.toString(i);
@@ -612,9 +615,9 @@ public class torture_arcus_integration implements client_profile {
     }
 
     // MopDelete
-    for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < 1; j++) {
       // Delete 50 mkey
-      for (int i = 0; i < 50; i++) {
+      for (int i = 0; i < 10; i++) {
         if (!cli.before_request())
           return false;
         // Uniq mkey
@@ -635,27 +638,26 @@ public class torture_arcus_integration implements client_profile {
 
     return true;
   }
-*/
 
   public boolean do_Collection_Set(client cli) throws Exception {
-    String key = cli.ks.get_key();
+    String key = cli.ks.get_key_by_cliid(cli);
     List<String> key_list = new LinkedList<String>();
-    for (int i = 0; i < 2; i++)
-      key_list.add(key + i);
+    for (int i = 0; i < 1; i++)
+      key_list.add(key + lowercase.charAt(i));
 
     CollectionAttributes attr = new CollectionAttributes();
     attr.setExpireTime(cli.conf.client_exptime);
 
-    String[] workloads = { chunk_values[1], 
-                           chunk_values[1], 
-                           chunk_values[2], 
-                           chunk_values[2], 
-                           chunk_values[3] };
+    String[] workloads = { chunk_values[4], 
+                           chunk_values[5], 
+                           chunk_values[6], 
+                           chunk_values[7], 
+                           chunk_values[8] };
 
     // SopInsert
     {
-      for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 19; j++) {
+      for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 10; j++) {
           if (!cli.before_request())
             return false;
           String set_value = workloads[i] + Integer.toString(j);
@@ -720,9 +722,9 @@ public class torture_arcus_integration implements client_profile {
     
     // SopExist    (Piped exist)
     {
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 1; i++) {
         List<Object> list_value = new LinkedList<Object>();
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < 10; j++) {
           if (!cli.before_request())
             return false;
           list_value.add(workloads[i] + Integer.toString(j));
@@ -762,8 +764,8 @@ public class torture_arcus_integration implements client_profile {
     
     // SopDelete
     {
-      for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 4; j++) {
+      for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 10; j++) {
           if (!cli.before_request())
             return false;
           String del_value = workloads[i] + Integer.toString(j);
@@ -785,24 +787,25 @@ public class torture_arcus_integration implements client_profile {
   }
 
   public boolean do_Collection_List(client cli) throws Exception {
-    String key = cli.ks.get_key();
+    String key = cli.ks.get_key_by_cliid(cli);
     List<String> key_list = new LinkedList<String>();
-    for (int i = 0; i < 2; i++)
-      key_list.add(key + i);
+    for (int i = 0; i < 1; i++)
+      key_list.add(key + lowercase.charAt(i));
+
 
     CollectionAttributes attr = new CollectionAttributes();
     attr.setExpireTime(cli.conf.client_exptime);
 
-    String[] workloads = { chunk_values[1], 
-                           chunk_values[1], 
-                           chunk_values[2], 
-                           chunk_values[2], 
-                           chunk_values[3] };
+    String[] workloads = { chunk_values[4], 
+                           chunk_values[5], 
+                           chunk_values[6], 
+                           chunk_values[7], 
+                           chunk_values[8] };
 
     // LopInsert
     {
       int index = -1; // tail insert
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 1; i++) {
         for (int j = 0; j < 10; j++) {
           if (!cli.before_request())
             return false;
@@ -851,7 +854,7 @@ public class torture_arcus_integration implements client_profile {
 
     // LopGet
     {
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 1; i++) {
         if (!cli.before_request())
           return false;
         int index = 0;
@@ -892,7 +895,7 @@ public class torture_arcus_integration implements client_profile {
     // LopDelete
     {
       int index = 0;
-      int index_to = 19;
+      int index_to = (int) (Math.random() * 20);
       for (int i = 0; i < 1; i++) {
         if (!cli.before_request())
           return false;

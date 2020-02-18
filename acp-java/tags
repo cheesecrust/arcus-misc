@@ -1,0 +1,376 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AddrUtil	arcus1.6.2-integration.py	/^from net.spy.memcached import ArcusClient, ConnectionFactoryBuilder, FailureMode, AddrUtil$/;"	i
+ArcusClient	arcus1.6.2-integration.py	/^from net.spy.memcached import ArcusClient, ConnectionFactoryBuilder, FailureMode, AddrUtil$/;"	i
+ArrayList	arcus1.6.2-integration.py	/^from java.util import ArrayList, HashMap, Random$/;"	i
+BigInteger	arcus1.6.2-integration.py	/^from java.math import BigInteger$/;"	i
+CollectionAttributes	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+CollectionOverflowAction	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+Collection_Btree	arcus1.6.2-integration.py	/^    def Collection_Btree(self, key):$/;"	m	class:TestRunner
+Collection_List	arcus1.6.2-integration.py	/^    def Collection_List(self, key):$/;"	m	class:TestRunner
+Collection_Set	arcus1.6.2-integration.py	/^    def Collection_Set(self, key):$/;"	m	class:TestRunner
+ConnectionFactoryBuilder	arcus1.6.2-integration.py	/^from net.spy.memcached import ArcusClient, ConnectionFactoryBuilder, FailureMode, AddrUtil$/;"	i
+DEFAULT_CONNECTION_WAIT	arcus1.6.2-integration.py	/^DEFAULT_CONNECTION_WAIT = 2 # init waiting$/;"	v
+DEFAULT_PREFIX	arcus1.6.2-integration.py	/^DEFAULT_PREFIX = 'arcustest-'$/;"	v
+DEFAULT_TIMEOUT	arcus1.6.2-integration.py	/^DEFAULT_TIMEOUT = 3000      # Operation default TO$/;"	v
+Element	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+ElementFlagFilter	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+ElementFlagUpdate	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+ElementValueType	arcus1.6.2-integration.py	/^from net.spy.memcached.collection import CollectionAttributes, CollectionOverflowAction, Element, ElementValueType, CollectionAttributes, ElementFlagFilter, ElementFlagUpdate$/;"	i
+ExecutionException	arcus1.6.2-integration.py	/^from java.util.concurrent import TimeUnit, TimeoutException, ExecutionException, Future$/;"	i
+ExpireTime	arcus1.6.2-integration.py	/^ExpireTime = 600    # seconds$/;"	v
+FailureMode	arcus1.6.2-integration.py	/^from net.spy.memcached import ArcusClient, ConnectionFactoryBuilder, FailureMode, AddrUtil$/;"	i
+Future	arcus1.6.2-integration.py	/^from java.util.concurrent import TimeUnit, TimeoutException, ExecutionException, Future$/;"	i
+HTTPPluginControl	arcus1.6.2-integration.py	/^from net.grinder.plugin.http import HTTPRequest, HTTPPluginControl$/;"	i
+HTTPRequest	arcus1.6.2-integration.py	/^from net.grinder.plugin.http import HTTPRequest, HTTPPluginControl$/;"	i
+HashMap	arcus1.6.2-integration.py	/^from java.util import ArrayList, HashMap, Random$/;"	i
+KeyLen	arcus1.6.2-integration.py	/^KeyLen = 20$/;"	v
+KeyValue	arcus1.6.2-integration.py	/^    def KeyValue(self, key):$/;"	m	class:TestRunner
+Level	arcus1.6.2-integration.py	/^from org.apache.log4j import Logger, Level;$/;"	i
+Logger	arcus1.6.2-integration.py	/^from org.apache.log4j import Logger, Level;$/;"	i
+Long	arcus1.6.2-integration.py	/^from java.lang import Long, Thread, Object, String, System$/;"	i
+Object	arcus1.6.2-integration.py	/^from java.lang import Long, Thread, Object, String, System$/;"	i
+OperationException	arcus1.6.2-integration.py	/^from net.spy.memcached.ops import OperationException$/;"	i
+Random	arcus1.6.2-integration.py	/^from java.util import ArrayList, HashMap, Random$/;"	i
+String	arcus1.6.2-integration.py	/^from java.lang import Long, Thread, Object, String, System$/;"	i
+System	arcus1.6.2-integration.py	/^from java.lang import Long, Thread, Object, String, System$/;"	i
+Test	arcus1.6.2-integration.py	/^from net.grinder.script import Test$/;"	i
+TestRunner	arcus1.6.2-integration.py	/^class TestRunner:$/;"	c
+Thread	arcus1.6.2-integration.py	/^from java.lang import Long, Thread, Object, String, System$/;"	i
+TimeUnit	arcus1.6.2-integration.py	/^from java.util.concurrent import TimeUnit, TimeoutException, ExecutionException, Future$/;"	i
+TimeoutException	arcus1.6.2-integration.py	/^from java.util.concurrent import TimeUnit, TimeoutException, ExecutionException, Future$/;"	i
+USE_GLOBAL_CLIENT	arcus1.6.2-integration.py	/^USE_GLOBAL_CLIENT = False   # False=per thread , True=process$/;"	v
+__call__	arcus1.6.2-integration.py	/^    def __call__(self):$/;"	m	class:TestRunner	file:
+__init__	arcus1.6.2-integration.py	/^    def __init__(self):$/;"	m	class:TestRunner
+acp	acp.java	/^  public acp(config conf) {$/;"	m	class:acp
+acp	acp.java	/^class acp {$/;"	c
+act_element_size	config.java	/^  public int act_element_size = 10000;$/;"	f	class:config
+add_latency	client.java	/^  public synchronized void add_latency(long lat) {$/;"	m	class:client
+after_request	client.java	/^  public boolean after_request(boolean ok) {$/;"	m	class:client
+after_request	client.java	/^  public boolean after_request(boolean ok, boolean check_latency)$/;"	m	class:client
+arcusGet	arcus1.6.2-integration.py	/^    def arcusGet(self, future, name='unknown', timeout=DEFAULT_TIMEOUT, timeunit=TimeUnit.MILLISECONDS):$/;"	m	class:TestRunner
+arcus_cloud	arcus1.6.2-integration.py	/^arcus_cloud = "localhost:2181"$/;"	v
+asyncDecode	raw_transcoder.java	/^  public boolean asyncDecode(CachedData d) {$/;"	m	class:raw_transcoder
+base_rate	config.java	/^  public int base_rate = 0;$/;"	f	class:config
+before_request	client.java	/^  public boolean before_request() {$/;"	m	class:client
+before_request	client.java	/^  public boolean before_request(boolean check_latency)$/;"	m	class:client
+bkey_set	bkey_set.java	/^  public bkey_set(int num) {$/;"	m	class:bkey_set
+bkey_set	bkey_set.java	/^class bkey_set {$/;"	c
+bks	client.java	/^  bkey_set bks;$/;"	f	class:client
+btree_elem_upsert	btree_elem_upsert.java	/^public class btree_elem_upsert implements client_profile {$/;"	c
+check_param	config_file_generator.pl	/^sub check_param  {$/;"	s
+chunk_sizes	arcus1.6.2-integration.py	/^chunk_sizes = [96, 120, 152, 192, 240, 304, 384, 480, 600, 752, 944, 1184, 1480, 1856, 2320, 2904, 3632, 4544, 5680, 7104, 8880, 11104, 13880, 17352, 21696, 27120, 33904, 42384, 52984, 66232, 82792, 103496, 129376, 161720, 202152, 252696, 315872, 394840, 493552, 1048576]$/;"	v
+chunk_sizes	torture_arcus_integration.java	/^  int[] chunk_sizes = {$/;"	f	class:torture_arcus_integration
+chunk_values	arcus1.6.2-integration.py	/^chunk_values = ["Not_a_slab_class"]$/;"	v
+chunk_values	torture_arcus_integration.java	/^  String[] chunk_values;$/;"	f	class:torture_arcus_integration
+client	acp.java	/^  client[] client;$/;"	f	class:acp
+client	client.java	/^  public client(config conf, int id, ArcusClientPool pool, keyset ks,$/;"	m	class:client
+client	client.java	/^public class client implements Runnable {$/;"	c
+client	config.java	/^  public int client = 10;$/;"	f	class:config
+client_exptime	config.java	/^  public int client_exptime = 100;$/;"	f	class:config
+client_mget_keys	config.java	/^  public int client_mget_keys = 500;$/;"	f	class:config
+client_profile	client_profile.java	/^interface client_profile {$/;"	i
+client_profile	config.java	/^  public String client_profile = "standard_mix";$/;"	f	class:config
+client_thread	acp.java	/^  Thread[] client_thread;$/;"	f	class:acp
+client_timeout	config.java	/^  public int client_timeout = 1000;$/;"	f	class:config
+conf	acp.java	/^    config conf;$/;"	f	class:acp.stats_display
+conf	acp.java	/^  config conf;$/;"	f	class:acp
+conf	client.java	/^  config conf;$/;"	f	class:client
+config	config.java	/^  public config() {$/;"	m	class:config
+config	config.java	/^public class config {$/;"	c
+create_key	torture_btree_exptime.java	/^  boolean create_key(client cli, String key) throws Exception {$/;"	m	class:torture_btree_exptime
+create_keys	create_keys.java	/^public class create_keys implements client_profile {$/;"	c
+decode	raw_transcoder.java	/^  public byte[] decode(CachedData d) {$/;"	m	class:raw_transcoder
+do_Collection_Btree	torture_arcus_integration.java	/^  public boolean do_Collection_Btree(client cli) throws Exception {$/;"	m	class:torture_arcus_integration
+do_Collection_List	torture_arcus_integration.java	/^  public boolean do_Collection_List(client cli) throws Exception {$/;"	m	class:torture_arcus_integration
+do_Collection_Map	torture_arcus_integration.java	/^  public boolean do_Collection_Map(client cli) throws Exception {$/;"	m	class:torture_arcus_integration
+do_Collection_Set	torture_arcus_integration.java	/^  public boolean do_Collection_Set(client cli) throws Exception {$/;"	m	class:torture_arcus_integration
+do_KeyValue	torture_arcus_integration.java	/^  public boolean do_KeyValue(client cli) throws Exception {$/;"	m	class:torture_arcus_integration
+do_btree_test	btree_elem_upsert.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:btree_elem_upsert
+do_btree_test	standard_mix.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:standard_mix
+do_btree_test	tiny_btree.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:tiny_btree
+do_btree_test	torture_btree.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree
+do_btree_test	torture_btree_bytebkey.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_bytebkey
+do_btree_test	torture_btree_bytemaxbkeyrange.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_bytemaxbkeyrange
+do_btree_test	torture_btree_decinc.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_decinc
+do_btree_test	torture_btree_exptime.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_exptime
+do_btree_test	torture_btree_ins_bulkdel.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_ins_bulkdel
+do_btree_test	torture_btree_ins_del.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_ins_del
+do_btree_test	torture_btree_ins_getwithdelete.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_ins_getwithdelete
+do_btree_test	torture_btree_ins_maxelement.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_ins_maxelement
+do_btree_test	torture_btree_maxbkeyrange.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_maxbkeyrange
+do_btree_test	torture_btree_replace.java	/^  public boolean do_btree_test(client cli) throws Exception {$/;"	m	class:torture_btree_replace
+do_delete_if_exist	standard_mix.java	/^  private boolean do_delete_if_exist(client cli, String key, CollectionType type)$/;"	m	class:standard_mix	file:
+do_get	get.java	/^  public boolean do_get(client cli) throws Exception {$/;"	m	class:get
+do_list_test	list_bulk_ins.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:list_bulk_ins
+do_list_test	list_bulk_piped_ins.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:list_bulk_piped_ins
+do_list_test	standard_mix.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:standard_mix
+do_list_test	torture_list.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:torture_list
+do_list_test	torture_list_ins_bulkdel.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:torture_list_ins_bulkdel
+do_list_test	torture_list_ins_del.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:torture_list_ins_del
+do_list_test	torture_list_ins_getwithdelete.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:torture_list_ins_getwithdelete
+do_list_test	torture_list_ins_maxelement.java	/^  public boolean do_list_test(client cli) throws Exception {$/;"	m	class:torture_list_ins_maxelement
+do_map_test	map_bulk_ins.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:map_bulk_ins
+do_map_test	map_bulk_piped_ins.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:map_bulk_piped_ins
+do_map_test	standard_mix.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:standard_mix
+do_map_test	torture_map.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:torture_map
+do_map_test	torture_map_ins_del.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:torture_map_ins_del
+do_map_test	torture_map_ins_getwithdelete.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:torture_map_ins_getwithdelete
+do_map_test	torture_map_replace.java	/^  public boolean do_map_test(client cli) throws Exception {$/;"	m	class:torture_map_replace
+do_mget	mget.java	/^  public boolean do_mget(client cli) throws Exception {$/;"	m	class:mget
+do_set	create_keys.java	/^  public boolean do_set(client cli) throws Exception {$/;"	m	class:create_keys
+do_set_test	set_bulk_ins.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:set_bulk_ins
+do_set_test	set_bulk_piped_ins.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:set_bulk_piped_ins
+do_set_test	set_exist.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:set_exist
+do_set_test	standard_mix.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:standard_mix
+do_set_test	torture_set.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:torture_set
+do_set_test	torture_set_ins_del.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:torture_set_ins_del
+do_set_test	torture_set_ins_getwithdelete.java	/^  public boolean do_set_test(client cli) throws Exception {$/;"	m	class:torture_set_ins_getwithdelete
+do_simple_test	simple_add.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_add
+do_simple_test	simple_append.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_append
+do_simple_test	simple_async_decr.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_async_decr
+do_simple_test	simple_async_get_bulk.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_async_get_bulk
+do_simple_test	simple_async_incr.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_async_incr
+do_simple_test	simple_cas.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_cas
+do_simple_test	simple_decr.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_decr
+do_simple_test	simple_del.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_del
+do_simple_test	simple_get_bulk.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_get_bulk
+do_simple_test	simple_getset.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_getset
+do_simple_test	simple_incr.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_incr
+do_simple_test	simple_prepend.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_prepend
+do_simple_test	simple_set.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_set
+do_simple_test	simple_set_bulk.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:simple_set_bulk
+do_simple_test	standard_mix.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:standard_mix
+do_simple_test	torture_cas.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:torture_cas
+do_simple_test	torture_simple_decinc.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:torture_simple_decinc
+do_simple_test	torture_simple_sticky.java	/^  public boolean do_simple_test(client cli) throws Exception {$/;"	m	class:torture_simple_sticky
+do_test	btree_elem_upsert.java	/^  public boolean do_test(client cli) {$/;"	m	class:btree_elem_upsert
+do_test	client_profile.java	/^  public boolean do_test(client cli);$/;"	m	interface:client_profile
+do_test	create_keys.java	/^  public boolean do_test(client cli) {$/;"	m	class:create_keys
+do_test	get.java	/^  public boolean do_test(client cli) {$/;"	m	class:get
+do_test	list_bulk_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:list_bulk_ins
+do_test	list_bulk_piped_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:list_bulk_piped_ins
+do_test	map_bulk_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:map_bulk_ins
+do_test	map_bulk_piped_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:map_bulk_piped_ins
+do_test	mget.java	/^  public boolean do_test(client cli) {$/;"	m	class:mget
+do_test	set_bulk_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:set_bulk_ins
+do_test	set_bulk_piped_ins.java	/^  public boolean do_test(client cli) {$/;"	m	class:set_bulk_piped_ins
+do_test	set_exist.java	/^  public boolean do_test(client cli) {$/;"	m	class:set_exist
+do_test	simple_add.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_add
+do_test	simple_append.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_append
+do_test	simple_async_decr.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_async_decr
+do_test	simple_async_get_bulk.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_async_get_bulk
+do_test	simple_async_incr.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_async_incr
+do_test	simple_cas.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_cas
+do_test	simple_decr.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_decr
+do_test	simple_del.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_del
+do_test	simple_get_bulk.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_get_bulk
+do_test	simple_getset.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_getset
+do_test	simple_incr.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_incr
+do_test	simple_prepend.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_prepend
+do_test	simple_set.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_set
+do_test	simple_set_bulk.java	/^  public boolean do_test(client cli) {$/;"	m	class:simple_set_bulk
+do_test	standard_mix.java	/^  public boolean do_test(client cli) {$/;"	m	class:standard_mix
+do_test	tiny_btree.java	/^  public boolean do_test(client cli) {$/;"	m	class:tiny_btree
+do_test	torture_arcus_integration.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_arcus_integration
+do_test	torture_btree.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree
+do_test	torture_btree_bytebkey.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_bytebkey
+do_test	torture_btree_bytemaxbkeyrange.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_bytemaxbkeyrange
+do_test	torture_btree_decinc.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_decinc
+do_test	torture_btree_exptime.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_exptime
+do_test	torture_btree_ins_bulkdel.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_ins_bulkdel
+do_test	torture_btree_ins_del.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_ins_del
+do_test	torture_btree_ins_getwithdelete.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_ins_getwithdelete
+do_test	torture_btree_ins_maxelement.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_ins_maxelement
+do_test	torture_btree_maxbkeyrange.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_maxbkeyrange
+do_test	torture_btree_replace.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_btree_replace
+do_test	torture_cas.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_cas
+do_test	torture_list.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_list
+do_test	torture_list_ins_bulkdel.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_list_ins_bulkdel
+do_test	torture_list_ins_del.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_list_ins_del
+do_test	torture_list_ins_getwithdelete.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_list_ins_getwithdelete
+do_test	torture_list_ins_maxelement.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_list_ins_maxelement
+do_test	torture_map.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_map
+do_test	torture_map_ins_del.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_map_ins_del
+do_test	torture_map_ins_getwithdelete.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_map_ins_getwithdelete
+do_test	torture_map_replace.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_map_replace
+do_test	torture_set.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_set
+do_test	torture_set_ins_del.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_set_ins_del
+do_test	torture_set_ins_getwithdelete.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_set_ins_getwithdelete
+do_test	torture_simple_decinc.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_simple_decinc
+do_test	torture_simple_sticky.java	/^  public boolean do_test(client cli) {$/;"	m	class:torture_simple_sticky
+dummystring	arcus1.6.2-integration.py	/^dummystring = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijlmnopqrstuvwxyz"$/;"	v
+dummystring	torture_arcus_integration.java	/^  char[] dummystring = $/;"	f	class:torture_arcus_integration
+encode	raw_transcoder.java	/^  public CachedData encode(byte[] o) {$/;"	m	class:raw_transcoder
+file_read	config_file_generator.pl	/^sub file_read {$/;"	s
+file_read_default_config	config_file_generator.pl	/^sub file_read_default_config {$/;"	s
+file_write	config_file_generator.pl	/^sub file_write {$/;"	s
+fixed_ac	client.java	/^  ArcusClient fixed_ac = null;$/;"	f	class:client
+gen_key	arcus1.6.2-integration.py	/^def gen_key(name="unknown"):$/;"	f
+gen_workload	arcus1.6.2-integration.py	/^def gen_workload(is_collection):$/;"	f
+generateData	arcus1.6.2-integration.py	/^def generateData(length):                                                                                                     $/;"	f
+get	get.java	/^public class get implements client_profile {  $/;"	c
+getMaxSize	raw_transcoder.java	/^  public int getMaxSize() {$/;"	m	class:raw_transcoder
+get_bkey	bkey_set.java	/^  public long get_bkey() {$/;"	m	class:bkey_set
+get_key	keyset.java	/^  public String get_key();$/;"	m	interface:keyset
+get_key	keyset_default.java	/^  synchronized public String get_key() {$/;"	m	class:keyset_default
+get_key	keyset_numeric.java	/^  synchronized public String get_key() {$/;"	m	class:keyset_numeric
+get_size	bkey_set.java	/^  public int get_size() {$/;"	m	class:bkey_set
+get_value	valueset.java	/^  public byte[] get_value();$/;"	m	interface:valueset
+get_value	valueset_default.java	/^  public byte[] get_value() {$/;"	m	class:valueset_default
+global_cfb	arcus1.6.2-integration.py	/^    global_cfb = ConnectionFactoryBuilder()$/;"	v
+global_client	arcus1.6.2-integration.py	/^    global_client = ArcusClient.createArcusClient(arcus_cloud, service_code, global_cfb)$/;"	v
+grinder	arcus1.6.2-integration.py	/^from net.grinder.script.Grinder import grinder$/;"	i
+id	client.java	/^  int id;$/;"	f	class:client
+ins_element_size	config.java	/^  public int ins_element_size = 50000;$/;"	f	class:config
+irg	config.java	/^  public int irg = 0;  \/\/ inter-request gap (msec)$/;"	f	class:config
+key_prefix	config.java	/^  public String key_prefix = null;$/;"	f	class:config
+keys	mget.java	/^  Collection<String> keys;$/;"	f	class:mget
+keys_size	mget.java	/^  int keys_size;$/;"	f	class:mget
+keyset	keyset.java	/^interface keyset {$/;"	i
+keyset_default	keyset_default.java	/^  public keyset_default(int num, String prefix) {$/;"	m	class:keyset_default
+keyset_default	keyset_default.java	/^class keyset_default implements keyset {$/;"	c
+keyset_length	config.java	/^  public int keyset_length = 0;$/;"	f	class:config
+keyset_numeric	keyset_numeric.java	/^  public keyset_numeric(int num, int len, String prefix) {$/;"	m	class:keyset_numeric
+keyset_numeric	keyset_numeric.java	/^class keyset_numeric implements keyset {$/;"	c
+keyset_profile	config.java	/^  public String keyset_profile = "default";$/;"	f	class:config
+keyset_size	config.java	/^  public int keyset_size = 100000;$/;"	f	class:config
+ks	client.java	/^  keyset ks;$/;"	f	class:client
+latency_vector	client.java	/^  Vector<Long> latency_vector = null;$/;"	f	class:client
+list_bulk_ins	list_bulk_ins.java	/^public class list_bulk_ins implements client_profile {$/;"	c
+list_bulk_piped_ins	list_bulk_piped_ins.java	/^public class list_bulk_piped_ins implements client_profile {$/;"	c
+load_file	config.java	/^  public void load_file(String path) throws Exception {$/;"	m	class:config
+main	acp.java	/^  public static void main(String[] args) throws Exception {$/;"	m	class:acp
+map_bulk_ins	map_bulk_ins.java	/^public class map_bulk_ins implements client_profile {$/;"	c
+map_bulk_piped_ins	map_bulk_piped_ins.java	/^public class map_bulk_piped_ins implements client_profile {$/;"	c
+max	valueset_default.java	/^  int max;$/;"	f	class:valueset_default
+mget	mget.java	/^  public mget(config conf, keyset ks) {$/;"	m	class:mget
+mget	mget.java	/^public class mget implements client_profile {  $/;"	c
+min	valueset_default.java	/^  int min;$/;"	f	class:valueset_default
+myclient	acp.java	/^    myclient(List<InetSocketAddress> addrs) throws Exception {$/;"	m	class:acp.myclient
+myclient	acp.java	/^  class myclient extends ArcusClient {$/;"	c	class:acp
+myfactory	acp.java	/^  class myfactory extends DefaultConnectionFactory {$/;"	c	class:acp
+next_ac	client.java	/^  ArcusClient next_ac;$/;"	f	class:client
+next_idx	bkey_set.java	/^  int next_idx;$/;"	f	class:bkey_set
+next_idx	keyset_default.java	/^  int next_idx;$/;"	f	class:keyset_default
+next_idx	keyset_numeric.java	/^  int next_idx;$/;"	f	class:keyset_numeric
+next_size	valueset_default.java	/^  int next_size;$/;"	f	class:valueset_default
+parse_args	acp.java	/^  public static void parse_args(String[] args, config conf) {$/;"	m	class:acp
+pool	acp.java	/^  ArcusClientPool[] pool;$/;"	f	class:acp
+pool	client.java	/^  ArcusClientPool pool;$/;"	f	class:client
+pool	config.java	/^  public int pool = 1;$/;"	f	class:config
+pool_size	config.java	/^  public int pool_size = 10;$/;"	f	class:config
+pool_use_random	config.java	/^  public boolean pool_use_random = false;$/;"	f	class:config
+pretty_stat	config.java	/^  public boolean pretty_stat = false;$/;"	f	class:config
+print_stack_trace	config.java	/^  public boolean print_stack_trace = true;$/;"	f	class:config
+print_usage	config_file_generator.pl	/^sub print_usage {$/;"	s
+print_usage	run_all_repl_test.pl	/^sub print_usage {$/;"	s
+print_usage	run_all_repl_test_v2.pl	/^sub print_usage {$/;"	s
+print_usage	run_client_repl_test.pl	/^sub print_usage {$/;"	s
+print_usage	run_some_repl_test_v2.pl	/^sub print_usage {$/;"	s
+process_line	config.java	/^  public void process_line(String line) throws Exception {$/;"	m	class:config
+profile	client.java	/^  client_profile profile;$/;"	f	class:client
+random	arcus1.6.2-integration.py	/^import sys, random, string, time$/;"	i
+random	torture_arcus_integration.java	/^  Random random = new Random(); \/\/ repeatable is okay$/;"	f	class:torture_arcus_integration
+rate	config.java	/^  public int rate = 0;$/;"	f	class:config
+raw_tc	raw_transcoder.java	/^  public static raw_transcoder raw_tc = new raw_transcoder();$/;"	f	class:raw_transcoder
+raw_transcoder	raw_transcoder.java	/^class raw_transcoder implements Transcoder<byte[]> {$/;"	c
+rem_requests	client.java	/^  int rem_requests;$/;"	f	class:client
+remove_latency_vector	client.java	/^  public synchronized Vector<Long> remove_latency_vector() {$/;"	m	class:client
+request	config.java	/^  public int request = 100000;$/;"	f	class:config
+request_end_usec	client.java	/^  long request_end_usec;$/;"	f	class:client
+request_start_usec	client.java	/^  long request_start_usec;$/;"	f	class:client
+reset	bkey_set.java	/^  public void reset() {$/;"	m	class:bkey_set
+reset	keyset.java	/^  public void reset();$/;"	m	interface:keyset
+reset	keyset_default.java	/^  public void reset() {$/;"	m	class:keyset_default
+reset	keyset_numeric.java	/^  public void reset() {$/;"	m	class:keyset_numeric
+reset	valueset.java	/^  public void reset();$/;"	m	interface:valueset
+reset	valueset_default.java	/^  public void reset() {$/;"	m	class:valueset_default
+reset_default_config	config_file_generator.pl	/^sub reset_default_config {$/;"	s
+run	acp.java	/^    public void run() {$/;"	m	class:acp.stats_display
+run	client.java	/^  public void run() {$/;"	m	class:client
+run_bench	acp.java	/^  public void run_bench() {$/;"	m	class:acp
+service_code	arcus1.6.2-integration.py	/^service_code = random.choice(service_codes)$/;"	v
+service_code	config.java	/^  public String service_code = "test";$/;"	f	class:config
+service_codes	arcus1.6.2-integration.py	/^service_codes = ["test-01"]$/;"	v
+set	bkey_set.java	/^  long[] set;$/;"	f	class:bkey_set
+set	keyset_default.java	/^  String[] set;$/;"	f	class:keyset_default
+set	keyset_numeric.java	/^  String[] set;$/;"	f	class:keyset_numeric
+set_bulk_ins	set_bulk_ins.java	/^public class set_bulk_ins implements client_profile {$/;"	c
+set_bulk_piped_ins	set_bulk_piped_ins.java	/^public class set_bulk_piped_ins implements client_profile {$/;"	c
+set_exist	set_exist.java	/^public class set_exist implements client_profile {$/;"	c
+set_fixed_arcus_client	client.java	/^  public void set_fixed_arcus_client(ArcusClient ac) {$/;"	m	class:client
+set_stop	client.java	/^  public void set_stop(boolean b) {$/;"	m	class:client
+setup	acp.java	/^  public void setup() throws Exception {$/;"	m	class:acp
+simple_add	simple_add.java	/^public class simple_add implements client_profile {$/;"	c
+simple_append	simple_append.java	/^public class simple_append implements client_profile {$/;"	c
+simple_async_decr	simple_async_decr.java	/^public class simple_async_decr implements client_profile {$/;"	c
+simple_async_get_bulk	simple_async_get_bulk.java	/^public class simple_async_get_bulk implements client_profile {$/;"	c
+simple_async_incr	simple_async_incr.java	/^public class simple_async_incr implements client_profile {$/;"	c
+simple_cas	simple_cas.java	/^public class simple_cas implements client_profile {$/;"	c
+simple_decr	simple_decr.java	/^public class simple_decr implements client_profile {$/;"	c
+simple_del	simple_del.java	/^public class simple_del implements client_profile {$/;"	c
+simple_get_bulk	simple_get_bulk.java	/^public class simple_get_bulk implements client_profile {$/;"	c
+simple_getset	simple_getset.java	/^public class simple_getset implements client_profile {$/;"	c
+simple_incr	simple_incr.java	/^public class simple_incr implements client_profile {$/;"	c
+simple_prepend	simple_prepend.java	/^public class simple_prepend implements client_profile {$/;"	c
+simple_set	simple_set.java	/^public class simple_set implements client_profile {$/;"	c
+simple_set_bulk	simple_set_bulk.java	/^public class simple_set_bulk implements client_profile {$/;"	c
+single_server	config.java	/^  public String single_server = null;$/;"	f	class:config
+standard_mix	standard_mix.java	/^public class standard_mix implements client_profile {$/;"	c
+start_byte	valueset_default.java	/^  byte start_byte;$/;"	f	class:valueset_default
+start_time	client.java	/^  long start_time;$/;"	f	class:client
+stat_requests	client.java	/^  public long stat_requests = 0;$/;"	f	class:client
+stat_requests_error	client.java	/^  public long stat_requests_error = 0;$/;"	f	class:client
+stats_display	acp.java	/^    public stats_display(config conf) {$/;"	m	class:acp.stats_display
+stats_display	acp.java	/^  class stats_display implements Runnable {$/;"	c	class:acp
+stop	acp.java	/^    boolean stop = false;$/;"	f	class:acp.stats_display
+stop	client.java	/^  boolean stop = false;$/;"	f	class:client
+string	arcus1.6.2-integration.py	/^import sys, random, string, time$/;"	i
+sys	arcus1.6.2-integration.py	/^import sys, random, string, time$/;"	i
+time	arcus1.6.2-integration.py	/^import sys, random, string, time$/;"	i
+time	config.java	/^  public int time = 0; \/\/ Run this many seconds.  0=forever$/;"	f	class:config
+tiny_btree	tiny_btree.java	/^public class tiny_btree implements client_profile {$/;"	c
+torture_arcus_integration	torture_arcus_integration.java	/^  public torture_arcus_integration() {$/;"	m	class:torture_arcus_integration
+torture_arcus_integration	torture_arcus_integration.java	/^public class torture_arcus_integration implements client_profile {$/;"	c
+torture_btree	torture_btree.java	/^public class torture_btree implements client_profile {$/;"	c
+torture_btree_bytebkey	torture_btree_bytebkey.java	/^public class torture_btree_bytebkey implements client_profile {$/;"	c
+torture_btree_bytemaxbkeyrange	torture_btree_bytemaxbkeyrange.java	/^public class torture_btree_bytemaxbkeyrange implements client_profile {$/;"	c
+torture_btree_decinc	torture_btree_decinc.java	/^public class torture_btree_decinc implements client_profile {$/;"	c
+torture_btree_exptime	torture_btree_exptime.java	/^public class torture_btree_exptime implements client_profile {$/;"	c
+torture_btree_ins_bulkdel	torture_btree_ins_bulkdel.java	/^public class torture_btree_ins_bulkdel implements client_profile {$/;"	c
+torture_btree_ins_del	torture_btree_ins_del.java	/^public class torture_btree_ins_del implements client_profile {$/;"	c
+torture_btree_ins_getwithdelete	torture_btree_ins_getwithdelete.java	/^public class torture_btree_ins_getwithdelete implements client_profile {$/;"	c
+torture_btree_ins_maxelement	torture_btree_ins_maxelement.java	/^public class torture_btree_ins_maxelement implements client_profile {$/;"	c
+torture_btree_maxbkeyrange	torture_btree_maxbkeyrange.java	/^public class torture_btree_maxbkeyrange implements client_profile {$/;"	c
+torture_btree_replace	torture_btree_replace.java	/^public class torture_btree_replace implements client_profile {$/;"	c
+torture_cas	torture_cas.java	/^public class torture_cas implements client_profile {$/;"	c
+torture_list	torture_list.java	/^public class torture_list implements client_profile {$/;"	c
+torture_list_ins_bulkdel	torture_list_ins_bulkdel.java	/^public class torture_list_ins_bulkdel implements client_profile {$/;"	c
+torture_list_ins_del	torture_list_ins_del.java	/^public class torture_list_ins_del implements client_profile {$/;"	c
+torture_list_ins_getwithdelete	torture_list_ins_getwithdelete.java	/^public class torture_list_ins_getwithdelete implements client_profile {$/;"	c
+torture_list_ins_maxelement	torture_list_ins_maxelement.java	/^public class torture_list_ins_maxelement implements client_profile {$/;"	c
+torture_map	torture_map.java	/^public class torture_map implements client_profile {$/;"	c
+torture_map_ins_del	torture_map_ins_del.java	/^public class torture_map_ins_del implements client_profile {$/;"	c
+torture_map_ins_getwithdelete	torture_map_ins_getwithdelete.java	/^public class torture_map_ins_getwithdelete implements client_profile {$/;"	c
+torture_map_replace	torture_map_replace.java	/^public class torture_map_replace implements client_profile {$/;"	c
+torture_set	torture_set.java	/^public class torture_set implements client_profile {$/;"	c
+torture_set_ins_del	torture_set_ins_del.java	/^public class torture_set_ins_del implements client_profile {$/;"	c
+torture_set_ins_getwithdelete	torture_set_ins_getwithdelete.java	/^public class torture_set_ins_getwithdelete implements client_profile {$/;"	c
+torture_simple_decinc	torture_simple_decinc.java	/^public class torture_simple_decinc implements client_profile {$/;"	c
+torture_simple_sticky	torture_simple_sticky.java	/^public class torture_simple_sticky implements client_profile {$/;"	c
+usage	acp.java	/^  public static void usage() {$/;"	m	class:acp
+value	arcus1.6.2-integration.py	/^    value = "".join([random.choice(string.lowercase) for i in range(int(s*2\/3))])$/;"	v
+valueset	valueset.java	/^interface valueset {$/;"	i
+valueset_default	valueset_default.java	/^  public valueset_default(int min, int max) {$/;"	m	class:valueset_default
+valueset_default	valueset_default.java	/^class valueset_default implements valueset {$/;"	c
+valueset_max_size	config.java	/^  public int valueset_max_size = 4096;$/;"	f	class:config
+valueset_min_size	config.java	/^  public int valueset_min_size = 10;$/;"	f	class:config
+valueset_profile	config.java	/^  public String valueset_profile = "default";$/;"	f	class:config
+vset	client.java	/^  valueset vset;$/;"	f	class:client
+workloads	arcus1.6.2-integration.py	/^workloads = [chunk_values[1], $/;"	v
+zookeeper	config.java	/^  public String zookeeper = "127.0.0.1:2181";$/;"	f	class:config

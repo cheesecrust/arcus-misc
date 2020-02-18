@@ -27,6 +27,16 @@
 #include "client_profile.h"
 #include "client.h"
 
+static int print_check(int ok, memcached_return rc)
+{
+  if (ok) return 0;
+  if (rc == MEMCACHED_ELEMENT_EXISTS || rc == MEMCACHED_EXISTS
+      || rc == MEMCACHED_TYPE_MISMATCH) {
+    return 0;
+  }
+  return 1;
+}
+
 static int
 do_btree_test(struct client *cli)
 {
@@ -36,28 +46,29 @@ do_btree_test(struct client *cli)
   uint64_t bkey;
   
   // Pick a key
-  const char *key = keyset_get_key(cli->ks, NULL);
+  const char *key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
   
   // Create a btree item
   if (0 != client_before_request(cli))
     return -1;
   
-  memcached_coll_create_attrs_init(&attr, 20 /* flags */, 100 /* exptime */,
+  memcached_coll_create_attrs_init(&attr, 20 /* flags */, 60 /* exptime */,
     4000 /* maxcount */);
   memcached_coll_create_attrs_set_overflowaction(&attr,
     OVERFLOWACTION_SMALLEST_TRIM);
   rc = memcached_bop_create(cli->next_mc, key, keylen, &attr);
   ok = (rc == MEMCACHED_SUCCESS);
-  if (!ok) {
+  if (print_check(ok, rc)) {
     print_log("bop create failed. id=%d key=%s rc=%d(%s)", cli->id, key,
-      rc, memcached_strerror(NULL, rc));
+              rc, memcached_detail_error_message(cli->next_mc, rc));
   }
   if (0 != client_after_request(cli, ok))
     return -1;
   
+  if (ok) {
   // Insert a number of btree element
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
     
@@ -77,13 +88,14 @@ do_btree_test(struct client *cli)
       NULL /* Do not create automatically */);
     valueset_return_value(cli->vs, val_ptr);
     ok = (rc == MEMCACHED_SUCCESS);
-    if (!ok) {
+    if (print_check(ok, rc)) {
       print_log("bop insert failed. id=%d key=%s bkey=%llu rc=%d(%s)",
         cli->id, key, (long long unsigned)bkey,
-        rc, memcached_strerror(NULL, rc));
+        rc, memcached_detail_error_message(cli->next_mc, rc));
     }
     if (0 != client_after_request(cli, ok))
       return -1;
+  }
   }
   
   // Update
@@ -106,27 +118,28 @@ do_set_test(struct client *cli)
   const char *key;
   
   // Pick a key
-  key = keyset_get_key(cli->ks, NULL);
+  key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
   
   // Create a set item
   if (0 != client_before_request(cli))
     return -1;
 
-  memcached_coll_create_attrs_init(&attr, 10 /* flags */, 100 /* exptime */,
+  memcached_coll_create_attrs_init(&attr, 10 /* flags */, 60 /* exptime */,
     4000 /* maxcount */);
   memcached_coll_create_attrs_set_overflowaction(&attr, OVERFLOWACTION_ERROR);
   rc = memcached_sop_create(cli->next_mc, key, keylen, &attr);
   ok = (rc == MEMCACHED_SUCCESS);
-  if (!ok) {
+  if (print_check(ok, rc)) {
     print_log("sop create failed. id=%d key=%s rc=%d(%s)", cli->id, key,
-      rc, memcached_strerror(NULL, rc));
+      rc, memcached_detail_error_message(cli->next_mc, rc));
   }
   if (0 != client_after_request(cli, ok))
     return -1;
   
+  if (ok) {
   // Insert a number of elements.  Set has no element keys.
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
     
@@ -142,12 +155,13 @@ do_set_test(struct client *cli)
       NULL /* Do not create automatically */);
     valueset_return_value(cli->vs, val_ptr);
     ok = (rc == MEMCACHED_SUCCESS);
-    if (!ok) {
+    if (print_check(ok, rc)) {
       print_log("sop insert failed. id=%d key=%s val_len=%d rc=%d(%s)",
-        cli->id, key, val_len, rc, memcached_strerror(NULL, rc));
+        cli->id, key, val_len, rc, memcached_detail_error_message(cli->next_mc, rc));
     }
     if (0 != client_after_request(cli, ok))
       return -1;
+  }
   }
   
   // Get/delete
@@ -167,28 +181,29 @@ do_list_test(struct client *cli)
   const char *key;
   
   // Pick a key
-  key = keyset_get_key(cli->ks, NULL);
+  key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
     
   // Create a list item
   if (0 != client_before_request(cli))
     return -1;
   
-  memcached_coll_create_attrs_init(&attr, 10 /* flags */, 100 /* exptime */,
+  memcached_coll_create_attrs_init(&attr, 10 /* flags */, 60 /* exptime */,
     4000 /* maxcount */);
   memcached_coll_create_attrs_set_overflowaction(&attr,
     OVERFLOWACTION_TAIL_TRIM);
   rc = memcached_lop_create(cli->next_mc, key, keylen, &attr);
   ok = (rc == MEMCACHED_SUCCESS);
-  if (!ok) {
+  if (print_check(ok, rc)) {
     print_log("lop create failed. id=%d key=%s rc=%d(%s)", cli->id, key,
-      rc, memcached_strerror(NULL, rc));
+      rc, memcached_detail_error_message(cli->next_mc, rc));
   }
   if (0 != client_after_request(cli, ok))
     return -1;
   
   // Insert a number of elements.  Push at the head.
-  for (i = 0; i < 100; i++) {
+  if (ok) {
+  for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
     
@@ -205,12 +220,13 @@ do_list_test(struct client *cli)
       NULL /* Do not create automatically */);
     valueset_return_value(cli->vs, val_ptr);
     ok = (rc == MEMCACHED_SUCCESS);
-    if (!ok) {
+    if (print_check(ok, rc)) {
       print_log("lop insert failed. id=%d key=%s rc=%d(%s)", cli->id, key,
-        rc, memcached_strerror(NULL, rc));
+        rc, memcached_detail_error_message(cli->next_mc, rc));
     }
     if (0 != client_after_request(cli, ok))
       return -1;
+  }
   }
   
   // Get/delete
@@ -220,6 +236,74 @@ do_list_test(struct client *cli)
   // Getattr
   return 0;
 }
+
+ static int
+ do_map_test(struct client *cli)
+ {
+     memcached_return rc;
+     memcached_coll_create_attrs_st attr;
+     int i, ok, keylen;
+     const char *key;
+
+     // Pick a key
+     key = keyset_get_key_by_cliid(cli->ks, cli);
+     keylen = strlen(key);
+
+     // Create a list item
+     if (0 != client_before_request(cli))
+     return -1;
+
+     memcached_coll_create_attrs_init(&attr, 10 /* flags */, 60 /* exptime */,
+     4000 /* maxcount */);
+     memcached_coll_create_attrs_set_overflowaction(&attr,
+     OVERFLOWACTION_ERROR);
+     rc = memcached_mop_create(cli->next_mc, key, keylen, &attr);
+     ok = (rc == MEMCACHED_SUCCESS);
+     if (print_check(ok, rc)) {
+     print_log("mop create failed. id=%d key=%s rc=%d(%s)", cli->id, key,
+     rc, memcached_detail_error_message(cli->next_mc, rc));
+     }
+     if (0 != client_after_request(cli, ok))
+     return -1;
+
+     if (ok) {
+     char *mkey = (char*)malloc(10);
+     int len = 0;
+     // Insert a number of elements.
+     for (i = 0; i < 10; i++) {
+     uint8_t *val_ptr;
+     int val_len;
+
+     if (0 != client_before_request(cli))
+     return -1;
+
+     len = sprintf(mkey, "%d", i);
+
+     val_ptr = NULL;
+     val_len = valueset_get_value(cli->vs, &val_ptr);
+     assert(val_ptr != NULL && val_len > 0 && val_len <= 4096);
+
+      rc = memcached_mop_insert(cli->next_mc, key, keylen,
+        (const char*)mkey, len, (const char*)val_ptr, (size_t)val_len,
+        NULL /* Do not create automatically */);
+      valueset_return_value(cli->vs, val_ptr);
+      ok = (rc == MEMCACHED_SUCCESS);
+      if (print_check(ok, rc)) {
+        print_log("mop insert failed. id=%d key=%s mkey=%.*s rc=%d(%s)",
+          cli->id, key, len, mkey,
+          rc, memcached_detail_error_message(cli->next_mc, rc));
+      }
+      if (0 != client_after_request(cli, ok))
+        return -1;
+     }
+     }
+     // Get/delete
+     // Delete
+     // PipedInsert
+     // Expire time
+     // Getattr
+     return 0;
+ }
 
 static int
 do_simple_test(struct client *cli)
@@ -231,12 +315,12 @@ do_simple_test(struct client *cli)
   int val_len;
   
   // Set a number of items
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 1; i++) {
     if (0 != client_before_request(cli))
       return -1;
     
     // Pick a key
-    key = keyset_get_key(cli->ks, NULL);
+    key = keyset_get_key_by_cliid(cli->ks, cli);
     keylen = strlen(key);
 
     // Pick a value
@@ -245,12 +329,12 @@ do_simple_test(struct client *cli)
     assert(val_ptr != NULL && val_len > 0);
     
     rc = memcached_set(cli->next_mc, key, keylen, (const char*)val_ptr,
-      (size_t)val_len, 100 /* exptime */, 0 /* flags */);
+      (size_t)val_len, 60 /* exptime */, 0 /* flags */);
     valueset_return_value(cli->vs, val_ptr);
     ok = (rc == MEMCACHED_SUCCESS);
-    if (!ok) {
+    if (print_check(ok, rc)) {
       print_log("set failed. id=%d key=%s rc=%d(%s)", cli->id, key,
-        rc, memcached_strerror(NULL, rc));
+        rc, memcached_detail_error_message(cli->next_mc, rc));
     }
     if (0 != client_after_request(cli, ok))
       return -1;
@@ -274,6 +358,9 @@ do_test(struct client *cli)
   if (0 != do_btree_test(cli))
     return -1;
   
+  if (0 != do_map_test(cli))
+    return -1;
+
   if (0 != do_set_test(cli))
     return -1;
   

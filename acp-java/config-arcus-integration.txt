@@ -1,23 +1,19 @@
+zookeeper=10.33.144.120:2181,10.33.145.182:2181,10.34.33.62:2181
+service_code=long_running
+#single_server=10.34.30.237:11700
 
-zookeeper=127.0.0.1:2181
+client=16
+client_exptime=1000
 
-service_code=test
-
-#single_server=cachehost:11212
-
-client=8
-
-rate=0
+rate=300
 request=0
-time=6000
+time=0
 
-keyset_size=10000000
-key_prefix=simple_decinc:
-valueset_min_size=10
-valueset_max_size=10
+keyset_size=600000
+key_prefix=java-s003:
 
 client_profile=torture_arcus_integration
 
 pool=1
-pool_size=8
+pool_size=16
 pool_use_random=false
