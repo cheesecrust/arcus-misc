@@ -241,11 +241,11 @@ class acp {
     // Value profile
     valueset vset = null;
     if (conf.valueset_profile.equals("default")) {
-      vset = new valueset_default(conf.valueset_min_size, 
+      vset = new valueset_default(conf.valueset_min_size,
                                   conf.valueset_max_size);
     }
     if (vset == null) {
-      System.out.println("Cannot find valueset profile=" + 
+      System.out.println("Cannot find valueset profile=" +
                          conf.valueset_profile);
       System.exit(0);
     }
@@ -253,11 +253,19 @@ class acp {
     // Make Arcus pools
     pool = new ArcusClientPool[conf.pool];
     if (conf.single_server != null) {
-      String[] temp = conf.single_server.split(":");
-      InetSocketAddress inet =
-        new InetSocketAddress(temp[0], Integer.parseInt(temp[1]));
+      List<String> servers = new ArrayList<String>();
+      if (conf.single_server.contains(",")) {
+        servers.addAll(Arrays.asList(conf.single_server.split(",")));
+      } else {
+        servers.add(conf.single_server);
+      }
+
       List<InetSocketAddress> inet_list = new ArrayList<InetSocketAddress>();
-      inet_list.add(inet);
+      for (int i = 0; i < servers.size(); i++) {
+        String[] temp = servers.get(i).split(":");
+        InetSocketAddress inet = new InetSocketAddress(temp[0], Integer.parseInt(temp[1]));
+        inet_list.add(inet);
+      }
 
       for (int i = 0; i < conf.pool; i++) {
         ArcusClient[] clients = new ArcusClient[conf.pool_size];
@@ -275,7 +283,7 @@ class acp {
         ConnectionFactoryBuilder factory = new ConnectionFactoryBuilder();
         factory.setOpTimeout(conf.client_timeout);
 
-        ArcusClientPool p = 
+        ArcusClientPool p =
           ArcusClient.createArcusClientPool(conf.zookeeper, conf.service_code,
                                             factory,
                                             conf.pool_size);
@@ -357,7 +365,7 @@ class acp {
       stats_thread.join();
     } catch (Exception e) {
     }
-    
+
     System.out.println("Tests finished.");
   }
 
@@ -398,7 +406,7 @@ class acp {
             }
           }
         }
-        
+
         if (conf.pretty_stat && (line % 30) == 0) {
           System.out.printf("Requests/s\t\tLatency (msec)\n" +
                             "Okay\tError\t\tmin\t50th\t90th\n" +
@@ -481,7 +489,7 @@ class acp {
           System.out.printf("latency (usec). requests=%d min=%d 10th=%d" +
                             " 50th=%d 80th=%d 90th=%d 99th=%d max=%d\n",
                             all_latencies.length,
-                            all_latencies[0], 
+                            all_latencies[0],
                             all_latencies[all_latencies.length * 10/100],
                             all_latencies[all_latencies.length * 50/100],
                             all_latencies[all_latencies.length * 80/100],
@@ -500,7 +508,7 @@ class acp {
                             all_latencies[0], all_latencies[all_latencies.length * 50/100], all_latencies[all_latencies.length * 90/100]);
           */
           System.out.printf("%d\t%d\t\t%.02f\t%.02f\t%.02f\n", delta_requests, delta_error, //request_rate, error_rate,
-                            all_latencies[0]/1000.0, all_latencies[all_latencies.length * 50/100]/1000.0, 
+                            all_latencies[0]/1000.0, all_latencies[all_latencies.length * 50/100]/1000.0,
                             all_latencies[all_latencies.length * 90/100]/1000.0);
         }
         else {
@@ -514,7 +522,7 @@ class acp {
     config conf = new config();
     String config_path = null;
     for (int i = 0; i < args.length; i++) {
-	    if (args[i].equals("-config")) {
+      if (args[i].equals("-config")) {
         i++;
         if (i >= args.length) {
           System.out.println("-config requires path");
@@ -538,9 +546,9 @@ class acp {
   public static void usage() {
     String txt =
       "acp options\n" +
-      "-config path\n" + 
+      "-config path\n" +
       "    Use configuration file at <path>\n" +
-      "-pretty-stat\n" + 
+      "-pretty-stat\n" +
       "\n" +
       "--------------------------------------\n" +
       "Use the following to override settings\n" +
@@ -573,7 +581,7 @@ class acp {
 
   public static void parse_args(String[] args, config conf) {
     for (int i = 0; i < args.length; i++) {
-	    if (args[i].equals("-config")) {
+      if (args[i].equals("-config")) {
         i++;
         if (i >= args.length) {
           System.out.println("-config requires path");
@@ -581,34 +589,34 @@ class acp {
         }
         // Ignore
       }
-	    else if (args[i].equals("-pretty-stat")) {
+      else if (args[i].equals("-pretty-stat")) {
         conf.pretty_stat = true;
       }
-	    else if (args[i].equals("-zookeeper")) {
+      else if (args[i].equals("-zookeeper")) {
         i++;
         if (i >= args.length) {
           System.out.println("-zookeeper requires host:port");
           System.exit(0);
         }
         conf.zookeeper = args[i];
-	    }
-	    else if (args[i].equals("-service-code")) {
+      }
+      else if (args[i].equals("-service-code")) {
         i++;
         if (i >= args.length) {
           System.out.println("-service-code requires service string");
           System.exit(0);
         }
         conf.service_code = args[i];
-	    }
-	    else if (args[i].equals("-client")) {
+      }
+      else if (args[i].equals("-client")) {
         i++;
         if (i >= args.length) {
           System.out.println("-client requires the number of client");
           System.exit(0);
         }
         conf.client = Integer.parseInt(args[i]);
-	    }
-	    else if (args[i].equals("-rate")) {
+      }
+      else if (args[i].equals("-rate")) {
         i++;
         if (i >= args.length) {
           System.out.println("-rate requires the number of requests" +
@@ -616,8 +624,8 @@ class acp {
           System.exit(0);
         }
         conf.rate = Integer.parseInt(args[i]);
-	    }
-	    else if (args[i].equals("-request")) {
+      }
+      else if (args[i].equals("-request")) {
         i++;
         if (i >= args.length) {
           System.out.println("-request requires the number of requests" +
@@ -625,24 +633,24 @@ class acp {
           System.exit(0);
         }
         conf.request = Integer.parseInt(args[i]);
-	    }
-	    else if (args[i].equals("-time")) {
+      }
+      else if (args[i].equals("-time")) {
         i++;
         if (i >= args.length) {
           System.out.println("-time requires the number of seconds");
           System.exit(0);
         }
         conf.time = Integer.parseInt(args[i]);
-	    }
-	    else if (args[i].equals("-pool")) {
+      }
+      else if (args[i].equals("-pool")) {
         i++;
         if (i >= args.length) {
           System.out.println("-pool requires the number of pools");
           System.exit(0);
         }
         conf.pool = Integer.parseInt(args[i]);
-	    }
-	    else if (args[i].equals("-pool-size")) {
+      }
+      else if (args[i].equals("-pool-size")) {
         i++;
         if (i >= args.length) {
           System.out.println("-pool-size requires the number of pools");
