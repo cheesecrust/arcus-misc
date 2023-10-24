@@ -44,15 +44,15 @@ do_btree_test(struct client *cli)
   memcached_return rc;
   int i, ok, keylen;
   uint64_t bkey;
-  
+
   // Pick a key
   const char *key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
-  
+
   // Create a btree item
   if (0 != client_before_request(cli))
     return -1;
-  
+
   memcached_coll_create_attrs_init(&attr, 20 /* flags */, 60 /* exptime */,
     4000 /* maxcount */);
   memcached_coll_create_attrs_set_overflowaction(&attr,
@@ -65,22 +65,22 @@ do_btree_test(struct client *cli)
   }
   if (0 != client_after_request(cli, ok))
     return -1;
-  
+
   if (ok) {
   // Insert a number of btree element
   for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
-    
+
     if (0 != client_before_request(cli))
       return -1;
-    
+
     bkey = 1234 + i;
 
     val_ptr = NULL;
     val_len = valueset_get_value(cli->vs, &val_ptr);
     assert(val_ptr != NULL && val_len > 0 && val_len <= 4096);
-    
+
     rc = memcached_bop_insert(cli->next_mc, key, keylen,
       bkey,
       NULL /* eflag */, 0 /* eflag length */,
@@ -97,7 +97,7 @@ do_btree_test(struct client *cli)
       return -1;
   }
   }
-  
+
   // Update
   // Get/delete
   // Upsert
@@ -116,11 +116,11 @@ do_set_test(struct client *cli)
   memcached_coll_create_attrs_st attr;
   int i, ok, keylen;
   const char *key;
-  
+
   // Pick a key
   key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
-  
+
   // Create a set item
   if (0 != client_before_request(cli))
     return -1;
@@ -136,16 +136,16 @@ do_set_test(struct client *cli)
   }
   if (0 != client_after_request(cli, ok))
     return -1;
-  
+
   if (ok) {
   // Insert a number of elements.  Set has no element keys.
   for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
-    
+
     if (0 != client_before_request(cli))
       return -1;
-    
+
     val_ptr = NULL;
     val_len = valueset_get_value(cli->vs, &val_ptr);
     assert(val_ptr != NULL && val_len > 0 && val_len <= 4096);
@@ -163,7 +163,7 @@ do_set_test(struct client *cli)
       return -1;
   }
   }
-  
+
   // Get/delete
   // Delete
   // PipedInsertBulk
@@ -179,15 +179,15 @@ do_list_test(struct client *cli)
   memcached_coll_create_attrs_st attr;
   int i, ok, keylen;
   const char *key;
-  
+
   // Pick a key
   key = keyset_get_key_by_cliid(cli->ks, cli);
   keylen = strlen(key);
-    
+
   // Create a list item
   if (0 != client_before_request(cli))
     return -1;
-  
+
   memcached_coll_create_attrs_init(&attr, 10 /* flags */, 60 /* exptime */,
     4000 /* maxcount */);
   memcached_coll_create_attrs_set_overflowaction(&attr,
@@ -200,16 +200,16 @@ do_list_test(struct client *cli)
   }
   if (0 != client_after_request(cli, ok))
     return -1;
-  
+
   // Insert a number of elements.  Push at the head.
   if (ok) {
   for (i = 0; i < 10; i++) {
     uint8_t *val_ptr;
     int val_len;
-    
+
     if (0 != client_before_request(cli))
       return -1;
-    
+
     val_ptr = NULL;
     val_len = valueset_get_value(cli->vs, &val_ptr);
     assert(val_ptr != NULL && val_len > 0 && val_len <= 4096);
@@ -228,7 +228,7 @@ do_list_test(struct client *cli)
       return -1;
   }
   }
-  
+
   // Get/delete
   // Delete
   // PipedInsert
@@ -296,6 +296,7 @@ do_list_test(struct client *cli)
       if (0 != client_after_request(cli, ok))
         return -1;
      }
+     free(mkey);
      }
      // Get/delete
      // Delete
@@ -313,12 +314,12 @@ do_simple_test(struct client *cli)
   const char *key;
   uint8_t *val_ptr;
   int val_len;
-  
+
   // Set a number of items
   for (i = 0; i < 1; i++) {
     if (0 != client_before_request(cli))
       return -1;
-    
+
     // Pick a key
     key = keyset_get_key_by_cliid(cli->ks, cli);
     keylen = strlen(key);
@@ -327,7 +328,7 @@ do_simple_test(struct client *cli)
     val_ptr = NULL;
     val_len = valueset_get_value(cli->vs, &val_ptr);
     assert(val_ptr != NULL && val_len > 0);
-    
+
     rc = memcached_set(cli->next_mc, key, keylen, (const char*)val_ptr,
       (size_t)val_len, 60 /* exptime */, 0 /* flags */);
     valueset_return_value(cli->vs, val_ptr);
@@ -339,7 +340,7 @@ do_simple_test(struct client *cli)
     if (0 != client_after_request(cli, ok))
       return -1;
   }
-  
+
   // Incr/decr
   // Get/delete
   // Update
@@ -357,19 +358,19 @@ do_test(struct client *cli)
 {
   if (0 != do_btree_test(cli))
     return -1;
-  
+
   if (0 != do_map_test(cli))
     return -1;
 
   if (0 != do_set_test(cli))
     return -1;
-  
+
   if (0 != do_list_test(cli))
     return -1;
-  
+
   if (0 != do_simple_test(cli))
     return -1; // Stop the test
-  
+
   return 0; // Do another test
 }
 
