@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import java.io.File;
 import java.util.Vector;
 
@@ -55,7 +56,7 @@ public class client implements Runnable {
     this.vset = vset;
     this.profile = profile;
   }
-  
+
   public void set_fixed_arcus_client(ArcusClient ac) {
     fixed_ac = ac;
   }
@@ -64,10 +65,8 @@ public class client implements Runnable {
     stop = b;
   }
 
-  public boolean before_request(boolean check_latency)
-  {
-    if (check_latency)
-    {
+  public boolean before_request(boolean check_latency) {
+    if (check_latency) {
       return before_request();
     }
 
@@ -81,55 +80,53 @@ public class client implements Runnable {
   }
 
   public boolean before_request() {
-      // Rate control
-      if (conf.rate > 0) {
-        // Send one request now or sleep 1ms?
-        boolean send_now = false;
-        while (!send_now) {
-          int runtime = (int)((System.currentTimeMillis() - start_time)/1000);
-          if (runtime > 0) {
-            int rate = (int)(stat_requests/runtime);
-            if (rate < conf.rate)
-              send_now = true;
-            else {
-              try {
-                Thread.sleep(1);
-              } catch (Exception e) {
-              }
+    // Rate control
+    if (conf.rate > 0) {
+      // Send one request now or sleep 1ms?
+      boolean send_now = false;
+      while (!send_now) {
+        int runtime = (int) ((System.currentTimeMillis() - start_time) / 1000);
+        if (runtime > 0) {
+          int rate = (int) (stat_requests / runtime);
+          if (rate < conf.rate)
+            send_now = true;
+          else {
+            try {
+              Thread.sleep(1);
+            } catch (Exception e) {
             }
           }
         }
       }
-      else if (conf.irg > 0) { // inter-request gap (msec)
-        try {
-          Thread.sleep(conf.irg);
-        } catch (Exception e) {
-        }
+    } else if (conf.irg > 0) { // inter-request gap (msec)
+      try {
+        Thread.sleep(conf.irg);
+      } catch (Exception e) {
       }
+    }
 
-      // Pick the ArcusClient
-      ArcusClient ac = fixed_ac;
-      if (ac == null) {
-        ac = pool.getClient();
-      }
-      next_ac = ac;
+    // Pick the ArcusClient
+    ArcusClient ac = fixed_ac;
+    if (ac == null) {
+      ac = pool.getClient();
+    }
+    next_ac = ac;
 
-      stat_requests++;
-      if (rem_requests == 0) {
-        // Run forever.
-        // acp counts down the run time and tells this thread to stop
-        // when the time runs out.
-      }
-      else {
-        // Count down, and stop if there are no requests remaining.
-        rem_requests--;
-        if (rem_requests <= 0)
-          rem_requests = -1; // Hack
-      }
-      
-      // Response time
-      request_start_usec = System.nanoTime() / 1000;
-      return true;
+    stat_requests++;
+    if (rem_requests == 0) {
+      // Run forever.
+      // acp counts down the run time and tells this thread to stop
+      // when the time runs out.
+    } else {
+      // Count down, and stop if there are no requests remaining.
+      rem_requests--;
+      if (rem_requests <= 0)
+        rem_requests = -1; // Hack
+    }
+
+    // Response time
+    request_start_usec = System.nanoTime() / 1000;
+    return true;
   }
 
   public synchronized Vector<Long> remove_latency_vector() {
@@ -152,10 +149,8 @@ public class client implements Runnable {
       latency_vector.add(lat);
   }
 
-  public boolean after_request(boolean ok, boolean check_latency)
-  {
-    if (check_latency)
-    {
+  public boolean after_request(boolean ok, boolean check_latency) {
+    if (check_latency) {
       return after_request(ok);
     }
     return true;
@@ -168,12 +163,10 @@ public class client implements Runnable {
       if (request_end_usec >= request_start_usec) {
         long lat = request_end_usec - request_start_usec;
         add_latency(lat);
-      }
-      else {
+      } else {
         // Ignore it.  Do not bother with wraparound.
       }
-    }
-    else
+    } else
       stat_requests_error++;
 
     if ((rem_requests == -1) || stop)
@@ -184,17 +177,17 @@ public class client implements Runnable {
   public void run() {
     rem_requests = conf.request;
     start_time = System.currentTimeMillis();
-    
-    System.out.printf("Client is running. id=%d\n", id);    
-    while (!stop) { 
-      /* Keep running */   
+
+    System.out.printf("Client is running. id=%d\n", id);
+    while (!stop) {
+      /* Keep running */
       File checkFile = new File("op_ignore");
       if (checkFile.exists()) {
         try {
-	  Thread.sleep(50);
-	} catch (InterruptedException e) {
-	  e.printStackTrace();
-	}
+          Thread.sleep(50);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
       } else {
         boolean do_another = profile.do_test(this);
         if (!do_another) {

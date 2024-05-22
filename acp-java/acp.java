@@ -233,6 +233,12 @@ class acp {
     else if (conf.client_profile.equals("simple_async_decr")) {
       profile = new simple_async_decr();
     }
+    else if (conf.client_profile.equals("torture_map_update")) {
+      profile = new torture_map_update(100, 500);
+    }
+    else if (conf.client_profile.equals("torture_map_pipe_update")) {
+      profile = new torture_map_pipe_update(100, 500);
+    }
     if (profile == null) {
       System.out.println("Cannot find client profile=" + conf.client_profile);
       System.exit(0);
@@ -359,6 +365,7 @@ class acp {
           t.join();
           join_count++;
         } catch (Exception e) {
+          System.out.println(e);
         }
       }
     }

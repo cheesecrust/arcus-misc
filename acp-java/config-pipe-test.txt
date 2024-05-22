@@ -1,0 +1,15 @@
+zookeeper=61.97.185.65:7133
+
+service_code=test
+
+client=256
+
+rate=0
+request=0
+time=60
+
+client_profile=torture_map_pipe_update
+
+pool=1
+pool_size=8
+pool_use_random=false

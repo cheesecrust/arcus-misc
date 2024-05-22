@@ -7,10 +7,10 @@ esac
 DIR=`dirname $DIR`
 if test -d "$DIR/../../arcus-java-client" ; then
   JAR_DIR=$DIR/../../arcus-java-client/target
-  CP=$JAR_DIR/arcus-java-client-1.12.0.jar:$JAR_DIR/zookeeper-3.4.14.jar:$JAR_DIR/log4j-core-2.8.2.jar:$JAR_DIR/log4j-api-2.8.2.jar:$JAR_DIR/log4j-slf4j-impl-2.8.2.jar:$JAR_DIR/slf4j-api-1.7.24.jar
+  CP=$JAR_DIR/arcus-java-client-1.13.4.jar:$JAR_DIR/zookeeper-jute-3.5.9.jar:$JAR_DIR/zookeeper-3.5.9.jar:$JAR_DIR/slf4j-api-1.7.24.jar:$JAR_DIR/log4j-api-2.17.1.jar:$JAR_DIR/log4j-core-2.17.1.jar:$JAR_DIR/log4j-slf4j-impl-2.17.1.jar
 else
-  if test -d "$DIR/../java-memcached-client" ; then
-    JAR_DIR=$DIR/../java-memcached-client/target
+  if test -d "$DIR/../../java-memcached-client" ; then
+    JAR_DIR=$DIR/../../java-memcached-client/target
     CP=$JAR_DIR/arcus-client-1.6.3.0.jar:$JAR_DIR/zookeeper-3.3.3-p1.jar:$JAR_DIR/log4j-1.2.16.jar
   else
     echo "Cannot find arcus jar directory."
