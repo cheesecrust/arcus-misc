@@ -298,17 +298,7 @@ class acp {
     int num_clients = 0;
     int p_client_idx = 0;
     ArcusClientPool p = pool[pool_idx];
-    ArcusClient[] p_clients = p.getAllClients();
     for (int i = 0; i < conf.client; i++) {
-      // Move to the next pool if the current one is full
-      if (num_clients >= clients_per_pool) {
-        pool_idx++;
-        p = pool[pool_idx];
-        p_clients = p.getAllClients();
-        num_clients = 0;
-        p_client_idx = 0;
-      }
-
       // Each client has its own bkey set.  FIXME
       client cli = new client(conf, i, p, kset, new bkey_set(100), vset,
                               profile);
@@ -316,10 +306,7 @@ class acp {
       // Pick ArcusClient in a round robin fashion, if we are not picking
       // random clients for each request.
       if (!conf.pool_use_random) {
-        if (p_client_idx >= p_clients.length) {
-          p_client_idx = 0;
-        }
-        cli.set_fixed_arcus_client(p_clients[p_client_idx]);
+        cli.set_fixed_arcus_client(p);
         System.out.printf("New client. id=%d pool=%d arcus_client=%d\n",
                           i, pool_idx, p_client_idx);
         p_client_idx++;

@@ -18,13 +18,12 @@
 import java.io.File;
 import java.util.Vector;
 
-import net.spy.memcached.ArcusClient;
 import net.spy.memcached.ArcusClientPool;
 
 public class client implements Runnable {
   config conf;
   ArcusClientPool pool;
-  ArcusClient fixed_ac = null;
+  ArcusClientPool fixed_ac = null;
   int id;
   int keyidx;
   keyset ks;
@@ -35,7 +34,7 @@ public class client implements Runnable {
   // Bookkeeping vars used when running the test
   boolean stop = false;
   long start_time;
-  ArcusClient next_ac;
+  ArcusClientPool next_ac;
   int rem_requests;
   long request_start_usec;
   long request_end_usec;
@@ -57,8 +56,8 @@ public class client implements Runnable {
     this.keyidx = 0;
     this.profile = profile;
   }
-  
-  public void set_fixed_arcus_client(ArcusClient ac) {
+
+  public void set_fixed_arcus_client(ArcusClientPool ac) {
     fixed_ac = ac;
   }
 
@@ -73,10 +72,10 @@ public class client implements Runnable {
       return before_request();
     }
 
-    // Pick the ArcusClient
-    ArcusClient ac = fixed_ac;
+    // Pick the ArcusClientPool
+    ArcusClientPool ac = fixed_ac;
     if (ac == null) {
-      ac = pool.getClient();
+      ac = pool;
     }
     next_ac = ac;
     return true;
@@ -109,10 +108,10 @@ public class client implements Runnable {
         }
       }
 
-      // Pick the ArcusClient
-      ArcusClient ac = fixed_ac;
+      // Pick the ArcusClientPool
+      ArcusClientPool ac = fixed_ac;
       if (ac == null) {
-        ac = pool.getClient();
+        ac = pool;
       }
       next_ac = ac;
 
@@ -128,7 +127,7 @@ public class client implements Runnable {
         if (rem_requests <= 0)
           rem_requests = -1; // Hack
       }
-      
+
       // Response time
       request_start_usec = System.nanoTime() / 1000;
       return true;
@@ -186,10 +185,10 @@ public class client implements Runnable {
   public void run() {
     rem_requests = conf.request;
     start_time = System.currentTimeMillis();
-    
-    System.out.printf("Client is running. id=%d\n", id);    
-    while (!stop) { 
-      /* Keep running */   
+
+    System.out.printf("Client is running. id=%d\n", id);
+    while (!stop) {
+      /* Keep running */
       File checkFile = new File("op_ignore");
       if (checkFile.exists()) {
         try {
