@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include <netinet/in.h>
 #include <assert.h>
+#include <time.h>
 
 #include "libmemcached/memcached.h"
 #include "common.h"
@@ -353,6 +354,154 @@ do_simple_test(struct client *cli)
   return 0;
 }
 
+#define MSET_COUNT 10
+#define BUFFER_SIZE 64
+#define EXPIRE_TIME 3600
+
+memcached_return_t memcached_mset(memcached_st *ptr,
+                                  const memcached_storage_request_st *req,
+                                  const size_t number_of_req,
+                                  memcached_return_t *results) __attribute__((weak));
+
+static inline void safe_free(void *ptr)
+{
+  if (ptr != NULL)
+  {
+    free(ptr);
+  }
+}
+
+static inline void safe_free_req(memcached_storage_request_st req[MSET_COUNT])
+{
+  if (req == NULL)
+  {
+    return;
+  }
+
+  int i;
+  for (i= 0; i < MSET_COUNT; i++)
+  {
+    safe_free(req[i].key);
+    safe_free(req[i].value);
+  }
+}
+
+static int
+do_mset_test(struct client *cli)
+{
+  if (!memcached_mset)
+  {
+    return 0;
+  }
+
+  memcached_storage_request_st req[MSET_COUNT];
+  memcached_return_t results[MSET_COUNT];
+  size_t i;
+
+  for (i = 0; i < MSET_COUNT; i++)
+  {
+    const char *key_base = keyset_get_key_by_cliid(cli->ks, cli);
+
+    char *key = (char *)malloc(BUFFER_SIZE);
+    if (key == NULL)
+    {
+      print_log("mset failed while allocating key. id=%d", cli->id);
+      return -1;
+    }
+
+    char *value = (char *)malloc(BUFFER_SIZE);
+    if (value == NULL)
+    {
+      print_log("mset failed while allocating value. id=%d key=%s", cli->id, key);
+      safe_free(key);
+      return -1;
+    }
+
+    memset(key, 0, BUFFER_SIZE);
+    snprintf(key, BUFFER_SIZE, "%s-%lu", key_base, i);
+
+    memset(value, 0, BUFFER_SIZE);
+    snprintf(value, BUFFER_SIZE, "mset-value-%lu-%u", i, (uint32_t) rand());
+
+    req[i].key = key;
+    req[i].key_length = strlen(key);
+
+    req[i].value = value;
+    req[i].value_length = strlen(value);
+
+    req[i].expiration = EXPIRE_TIME;
+    req[i].flags = (uint32_t) rand();
+  }
+
+  if (0 != client_before_request(cli))
+  {
+    return -1;
+  }
+
+  memcached_st *mc= cli->next_mc;
+  memcached_return_t rc = memcached_mset(mc, req, MSET_COUNT, results);
+  if (memcached_failed(rc))
+  {
+    print_log("mset failed. id=%d rc=%d(%s)",
+              cli->id, rc, memcached_detail_error_message(mc, rc));
+    return client_after_request(cli, false);
+  }
+
+  for (i = 0; i < MSET_COUNT; i++)
+  {
+    if (memcached_failed(results[i]))
+    {
+      print_log("mset failed. id=%d rc[%lu]=%d(%s)",
+                cli->id, i, rc, memcached_detail_error_message(mc, rc));
+      safe_free_req(req);
+      return client_after_request(cli, false);
+    }
+
+    size_t value_length = -1;
+    uint32_t flags = -1;
+    char *value = memcached_get(mc, req[i].key, req[i].key_length, &value_length, &flags, &rc);
+
+    if (value == NULL || memcached_failed(rc))
+    {
+      print_log("get after mset failed. id=%d key=%s rc[%lu]=%d(%s)",
+                cli->id, req[i].key, i, rc, memcached_detail_error_message(mc, rc));
+      safe_free(value);
+      safe_free_req(req);
+      return client_after_request(cli, false);
+    }
+
+    if (req[i].value_length != value_length)
+    {
+      print_log("get after mset failed for value_length. stored %ld but got %ld. id=%d key=%s rc[%lu]=%d(%s)",
+                req[i].value_length, value_length,  cli->id, req[i].key, i, rc, memcached_detail_error_message(mc, rc));
+      safe_free(value);
+      safe_free_req(req);
+      return client_after_request(cli, false);
+    }
+    if (strcmp(req[i].value, value))
+    {
+      print_log("get after mset failed for value. stored %s but got %s. id=%d key=%s rc[%lu]=%d(%s)",
+                req[i].value, value, cli->id, req[i].key, i, rc, memcached_detail_error_message(mc, rc));
+      safe_free(value);
+      safe_free_req(req);
+      return client_after_request(cli, false);
+    }
+    if (req[i].flags != flags)
+    {
+      print_log("get after mset failed for flags. stored %u but got %u. id=%d key=%s rc[%lu]=%d(%s)",
+                req[i].flags, flags, cli->id, req[i].key, i, rc, memcached_detail_error_message(mc, rc));
+      safe_free(value);
+      safe_free_req(req);
+      return client_after_request(cli, false);
+    }
+
+    safe_free(value);
+  }
+
+  safe_free_req(req);
+  return client_after_request(cli, true);
+}
+
 static int
 do_test(struct client *cli)
 {
@@ -371,6 +520,9 @@ do_test(struct client *cli)
   if (0 != do_simple_test(cli))
     return -1; // Stop the test
 
+  if (0 != do_mset_test(cli))
+    return -1;
+
   return 0; // Do another test
 }
 
@@ -381,5 +533,6 @@ static struct client_profile default_profile = {
 struct client_profile *
 standard_mix_init(void)
 {
+  srand(time(NULL));
   return &default_profile;
 }
