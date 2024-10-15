@@ -253,11 +253,19 @@ class acp {
     // Make Arcus pools
     pool = new ArcusClientPool[conf.pool];
     if (conf.single_server != null) {
-      String[] temp = conf.single_server.split(":");
-      InetSocketAddress inet =
-        new InetSocketAddress(temp[0], Integer.parseInt(temp[1]));
+      List<String> servers = new ArrayList<String>();
+      if (conf.single_server.contains(",")) {
+        servers.addAll(Arrays.asList(conf.single_server.split(",")));
+      } else {
+        servers.add(conf.single_server);
+      }
+
       List<InetSocketAddress> inet_list = new ArrayList<InetSocketAddress>();
-      inet_list.add(inet);
+      for (int i = 0; i < servers.size(); i++) {
+        String[] temp = servers.get(i).split(":");
+        InetSocketAddress inet = new InetSocketAddress(temp[0], Integer.parseInt(temp[1]));
+        inet_list.add(inet);
+      }
 
       for (int i = 0; i < conf.pool; i++) {
         ArcusClient[] clients = new ArcusClient[conf.pool_size];
