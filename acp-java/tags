@@ -58,9 +58,9 @@ asyncDecode	raw_transcoder.java	/^  public boolean asyncDecode(CachedData d) {$/
 base_rate	config.java	/^  public int base_rate = 0;$/;"	f	class:config
 before_request	client.java	/^  public boolean before_request() {$/;"	m	class:client
 before_request	client.java	/^  public boolean before_request(boolean check_latency)$/;"	m	class:client
-bkey_set	bkey_set.java	/^  public bkey_set(int num) {$/;"	m	class:bkey_set
-bkey_set	bkey_set.java	/^class bkey_set {$/;"	c
-bks	client.java	/^  bkey_set bks;$/;"	f	class:client
+jam2in.arcus.bkey_set	jam2in.arcus.bkey_set.java	/^  public jam2in.arcus.bkey_set(int num) {$/;"	m	class:jam2in.arcus.bkey_set
+jam2in.arcus.bkey_set	jam2in.arcus.bkey_set.java	/^class jam2in.arcus.bkey_set {$/;"	c
+bks	client.java	/^  jam2in.arcus.bkey_set bks;$/;"	f	class:client
 btree_elem_upsert	btree_elem_upsert.java	/^public class btree_elem_upsert implements client_profile {$/;"	c
 check_param	config_file_generator.pl	/^sub check_param  {$/;"	s
 chunk_sizes	arcus1.6.2-integration.py	/^chunk_sizes = [96, 120, 152, 192, 240, 304, 384, 480, 600, 752, 944, 1184, 1480, 1856, 2320, 2904, 3632, 4544, 5680, 7104, 8880, 11104, 13880, 17352, 21696, 27120, 33904, 42384, 52984, 66232, 82792, 103496, 129376, 161720, 202152, 252696, 315872, 394840, 493552, 1048576]$/;"	v
@@ -215,11 +215,11 @@ gen_workload	arcus1.6.2-integration.py	/^def gen_workload(is_collection):$/;"	f
 generateData	arcus1.6.2-integration.py	/^def generateData(length):                                                                                                     $/;"	f
 get	get.java	/^public class get implements client_profile {  $/;"	c
 getMaxSize	raw_transcoder.java	/^  public int getMaxSize() {$/;"	m	class:raw_transcoder
-get_bkey	bkey_set.java	/^  public long get_bkey() {$/;"	m	class:bkey_set
+get_bkey	jam2in.arcus.bkey_set.java	/^  public long get_bkey() {$/;"	m	class:jam2in.arcus.bkey_set
 get_key	keyset.java	/^  public String get_key();$/;"	m	interface:keyset
 get_key	keyset_default.java	/^  synchronized public String get_key() {$/;"	m	class:keyset_default
 get_key	keyset_numeric.java	/^  synchronized public String get_key() {$/;"	m	class:keyset_numeric
-get_size	bkey_set.java	/^  public int get_size() {$/;"	m	class:bkey_set
+get_size	jam2in.arcus.bkey_set.java	/^  public int get_size() {$/;"	m	class:jam2in.arcus.bkey_set
 get_value	valueset.java	/^  public byte[] get_value();$/;"	m	interface:valueset
 get_value	valueset_default.java	/^  public byte[] get_value() {$/;"	m	class:valueset_default
 global_cfb	arcus1.6.2-integration.py	/^    global_cfb = ConnectionFactoryBuilder()$/;"	v
@@ -255,7 +255,7 @@ myclient	acp.java	/^    myclient(List<InetSocketAddress> addrs) throws Exception
 myclient	acp.java	/^  class myclient extends ArcusClient {$/;"	c	class:acp
 myfactory	acp.java	/^  class myfactory extends DefaultConnectionFactory {$/;"	c	class:acp
 next_ac	client.java	/^  ArcusClient next_ac;$/;"	f	class:client
-next_idx	bkey_set.java	/^  int next_idx;$/;"	f	class:bkey_set
+next_idx	jam2in.arcus.bkey_set.java	/^  int next_idx;$/;"	f	class:jam2in.arcus.bkey_set
 next_idx	keyset_default.java	/^  int next_idx;$/;"	f	class:keyset_default
 next_idx	keyset_numeric.java	/^  int next_idx;$/;"	f	class:keyset_numeric
 next_size	valueset_default.java	/^  int next_size;$/;"	f	class:valueset_default
@@ -284,7 +284,7 @@ remove_latency_vector	client.java	/^  public synchronized Vector<Long> remove_la
 request	config.java	/^  public int request = 100000;$/;"	f	class:config
 request_end_usec	client.java	/^  long request_end_usec;$/;"	f	class:client
 request_start_usec	client.java	/^  long request_start_usec;$/;"	f	class:client
-reset	bkey_set.java	/^  public void reset() {$/;"	m	class:bkey_set
+reset	jam2in.arcus.bkey_set.java	/^  public void reset() {$/;"	m	class:jam2in.arcus.bkey_set
 reset	keyset.java	/^  public void reset();$/;"	m	interface:keyset
 reset	keyset_default.java	/^  public void reset() {$/;"	m	class:keyset_default
 reset	keyset_numeric.java	/^  public void reset() {$/;"	m	class:keyset_numeric
@@ -297,7 +297,7 @@ run_bench	acp.java	/^  public void run_bench() {$/;"	m	class:acp
 service_code	arcus1.6.2-integration.py	/^service_code = random.choice(service_codes)$/;"	v
 service_code	config.java	/^  public String service_code = "test";$/;"	f	class:config
 service_codes	arcus1.6.2-integration.py	/^service_codes = ["test-01"]$/;"	v
-set	bkey_set.java	/^  long[] set;$/;"	f	class:bkey_set
+set	jam2in.arcus.bkey_set.java	/^  long[] set;$/;"	f	class:jam2in.arcus.bkey_set
 set	keyset_default.java	/^  String[] set;$/;"	f	class:keyset_default
 set	keyset_numeric.java	/^  String[] set;$/;"	f	class:keyset_numeric
 set_bulk_ins	set_bulk_ins.java	/^public class set_bulk_ins implements client_profile {$/;"	c

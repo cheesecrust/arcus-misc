@@ -2,22 +2,17 @@ ACP-JAVA: Arcus Java Client Performance benchmark program
 
 Compile
 -------
-
-Modify compile.bash according to your Java setup and run it.
-No Eclipse support or any other IDE for that matter.
+    mvn install
+    mvn compile
 
 Run
 ---
-
-Modify run.bash according to your Java setup.  And use one of the config
-files as follows.
-
-    ./run.bash -config config-simple-decinc.txt
+    mvn exec:java -Dexec.args="-config scenario/config-simple-decinc.txt"
 
 How it works
 ------------
 
-The main thread creates one or more ArcusClientPool's, and then creates
+The  thread creates one or more ArcusClientPool's, and then creates
 a number of worker threads.  Each worker thread executes the test code
 specified in the config file (client_profile).
 
